@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gorilla/rpc"
 	"github.com/gorilla/rpc/json"
 	"log"
@@ -25,10 +24,10 @@ func (h *HelloService) SayHi(r *http.Request, args *HelloArgs, response *HelloRe
 }
 
 func main() {
-	fmt.Println("hello")
+	log.Println("start server...")
 
 	s := rpc.NewServer()
-	s.RegisterCodec(json.NewCodec(), "application_json")
+	s.RegisterCodec(json.NewCodec(), "application/json")
 	s.RegisterService(new(HelloService), "")
 	http.Handle("/rpc", s)
 
